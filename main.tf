@@ -29,7 +29,7 @@ resource "vault_auth_backend" "userpass" {
 
 # Create userpass users in admin namespace
 resource "vault_generic_endpoint" "userpass_users" {
-  for_each = var.enable_userpass_auth ? var.userpass_users : {}
+  for_each = var.enable_userpass_auth ? nonsensitive(var.userpass_users) : {}
 
   depends_on           = [vault_auth_backend.userpass]
   path                 = "auth/userpass/users/${each.key}"
