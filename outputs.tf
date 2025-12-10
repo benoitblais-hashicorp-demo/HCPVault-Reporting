@@ -62,6 +62,14 @@ output "userpass_users" {
   value       = var.enable_userpass_auth ? keys(var.userpass_users) : []
 }
 
+output "userpass_passwords" {
+  description = "Randomly generated passwords for userpass users. SENSITIVE - Store securely!"
+  value = var.enable_userpass_auth ? {
+    for username in keys(var.userpass_users) : username => random_password.userpass_passwords[username].result
+  } : null
+  sensitive = true
+}
+
 output "approle_auth_paths" {
   description = "Map of AppRole auth backend paths in each namespace."
   value = var.enable_approle_auth ? {

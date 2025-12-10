@@ -27,16 +27,27 @@ resource "vault_auth_backend" "userpass" {
   }
 }
 
+# Generate random passwords for userpass users
+resource "random_password" "userpass_passwords" {
+  for_each = var.enable_userpass_auth ? var.userpass_users : {}
+
+  length  = var.userpass_password_length
+  special = true
+  upper   = true
+  lower   = true
+  numeric = true
+}
+
 # Create userpass users in admin namespace
 resource "vault_generic_endpoint" "userpass_users" {
-  for_each = var.enable_userpass_auth ? nonsensitive(var.userpass_users) : {}
+  for_each = var.enable_userpass_auth ? var.userpass_users : {}
 
-  depends_on           = [vault_auth_backend.userpass]
+  depends_on           = [vault_auth_backend.userpass, random_password.userpass_passwords]
   path                 = "auth/userpass/users/${each.key}"
   ignore_absent_fields = true
 
   data_json = jsonencode({
-    password = each.value.password
+    password = random_password.userpass_passwords[each.key].result
     policies = each.value.policies
   })
 }

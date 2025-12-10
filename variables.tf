@@ -64,23 +64,29 @@ variable "apps" {
 
 variable "userpass_users" {
   type = map(object({
-    password = string
     policies = list(string)
   }))
-  description = "Map of userpass users with their passwords and policies."
-  sensitive   = true
+  description = "Map of userpass users with their policies. Passwords are automatically generated."
   default = {
     "admin" = {
-      password = "admin-password-changeme"
       policies = ["admin", "default"]
     }
     "engineer" = {
-      password = "engineer-password-changeme"
       policies = ["engineering", "default"]
     }
     "operator" = {
-      password = "operator-password-changeme"
       policies = ["operator", "default"]
     }
+  }
+}
+
+variable "userpass_password_length" {
+  type        = number
+  description = "Length of randomly generated passwords for userpass users."
+  default     = 24
+
+  validation {
+    condition     = var.userpass_password_length >= 16 && var.userpass_password_length <= 64
+    error_message = "The userpass_password_length must be between 16 and 64 characters."
   }
 }
