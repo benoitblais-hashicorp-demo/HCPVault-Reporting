@@ -110,6 +110,8 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>= 1.0.0)
 
+- <a name="requirement_random"></a> [random](#requirement\_random) (~> 3.6)
+
 - <a name="requirement_vault"></a> [vault](#requirement\_vault) (5.6.0)
 
 ## Modules
@@ -211,15 +213,22 @@ Default:
 ]
 ```
 
+### <a name="input_userpass_password_length"></a> [userpass\_password\_length](#input\_userpass\_password\_length)
+
+Description: Length of randomly generated passwords for userpass users.
+
+Type: `number`
+
+Default: `24`
+
 ### <a name="input_userpass_users"></a> [userpass\_users](#input\_userpass\_users)
 
-Description: Map of userpass users with their passwords and policies.
+Description: Map of userpass users with their policies. Passwords are automatically generated.
 
 Type:
 
 ```hcl
 map(object({
-    password = string
     policies = list(string)
   }))
 ```
@@ -229,21 +238,18 @@ Default:
 ```json
 {
   "admin": {
-    "password": "admin-password-changeme",
     "policies": [
       "admin",
       "default"
     ]
   },
   "engineer": {
-    "password": "engineer-password-changeme",
     "policies": [
       "engineering",
       "default"
     ]
   },
   "operator": {
-    "password": "operator-password-changeme",
     "policies": [
       "operator",
       "default"
@@ -256,6 +262,7 @@ Default:
 
 The following resources are used by this module:
 
+- [random_password.userpass_passwords](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) (resource)
 - [vault_approle_auth_backend_role.admin_automation](https://registry.terraform.io/providers/hashicorp/vault/5.6.0/docs/resources/approle_auth_backend_role) (resource)
 - [vault_approle_auth_backend_role.admin_fake](https://registry.terraform.io/providers/hashicorp/vault/5.6.0/docs/resources/approle_auth_backend_role) (resource)
 - [vault_approle_auth_backend_role.app_fake](https://registry.terraform.io/providers/hashicorp/vault/5.6.0/docs/resources/approle_auth_backend_role) (resource)
@@ -322,6 +329,10 @@ Description: Accessor for the userpass auth backend.
 ### <a name="output_userpass_mount_path"></a> [userpass\_mount\_path](#output\_userpass\_mount\_path)
 
 Description: Mount path for the userpass auth backend.
+
+### <a name="output_userpass_passwords"></a> [userpass\_passwords](#output\_userpass\_passwords)
+
+Description: Randomly generated passwords for userpass users. SENSITIVE - Store securely!
 
 ### <a name="output_userpass_users"></a> [userpass\_users](#output\_userpass\_users)
 
