@@ -23,6 +23,7 @@ Authentication to Vault can be configured using one of the following methods:
 - **VAULT\_NAMESPACE**: Optional - can be set to `reporting-demo` to scope operations to the reporting-demo namespace
 
 Example:
+
 ```bash
 export VAULT_ADDR="https://vault.example.com:8200"
 export VAULT_TOKEN="your-vault-token"
@@ -47,7 +48,7 @@ export VAULT_TOKEN="your-vault-token"
 
 The module creates the following namespace structure:
 
-```
+```text
 reporting-demo/ (root namespace for isolation)
 ├── userpass/
 │   ├── admin user
