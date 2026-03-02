@@ -1,8 +1,22 @@
+# Root namespace for reporting demo - provides isolation
+resource "vault_namespace" "reporting_demo" {
+  path = "reporting-demo"
+
+  custom_metadata = merge(
+    var.namespace_custom_metadata,
+    {
+      "type"    = "root"
+      "purpose" = "reporting-demo-isolation"
+    }
+  )
+}
+
 # Demo namespace - simple example
 resource "vault_namespace" "demo" {
   count = var.enable_demo_namespace ? 1 : 0
 
-  path = "demo"
+  namespace = vault_namespace.reporting_demo.path
+  path      = "demo"
 
   custom_metadata = merge(
     var.namespace_custom_metadata,
@@ -12,10 +26,11 @@ resource "vault_namespace" "demo" {
   )
 }
 
-# Userpass auth backend in admin namespace (already exists, so no namespace parameter needed)
+# Userpass auth backend in reporting-demo namespace
 resource "vault_auth_backend" "userpass" {
   count = var.enable_userpass_auth ? 1 : 0
 
+  namespace   = vault_namespace.reporting_demo.path_fq
   type        = "userpass"
   path        = "userpass"
   description = "Username and password authentication for administrators and operators"
@@ -38,11 +53,12 @@ resource "random_password" "userpass_passwords" {
   numeric = true
 }
 
-# Create userpass users in admin namespace
+# Create userpass users in reporting-demo namespace
 resource "vault_generic_endpoint" "userpass_users" {
   for_each = var.enable_userpass_auth ? var.userpass_users : {}
 
   depends_on           = [vault_auth_backend.userpass, random_password.userpass_passwords]
+  namespace            = vault_namespace.reporting_demo.path_fq
   path                 = "auth/userpass/users/${each.key}"
   ignore_absent_fields = true
 
@@ -52,13 +68,14 @@ resource "vault_generic_endpoint" "userpass_users" {
   })
 }
 
-# AppRole auth backend in admin namespace
+# AppRole auth backend in reporting-demo namespace
 resource "vault_auth_backend" "approle_admin" {
   count = var.enable_approle_auth ? 1 : 0
 
+  namespace   = vault_namespace.reporting_demo.path_fq
   type        = "approle"
   path        = "approle"
-  description = "AppRole authentication for applications and automation in admin namespace"
+  description = "AppRole authentication for applications and automation in reporting-demo namespace"
 
   tune {
     default_lease_ttl = "1h"
@@ -70,6 +87,7 @@ resource "vault_auth_backend" "approle_admin" {
 resource "vault_approle_auth_backend_role" "admin_automation" {
   count = var.enable_approle_auth ? 1 : 0
 
+  namespace      = vault_namespace.reporting_demo.path_fq
   backend        = vault_auth_backend.approle_admin[0].path
   role_name      = "admin-automation"
   token_policies = ["admin", "default"]
@@ -77,10 +95,11 @@ resource "vault_approle_auth_backend_role" "admin_automation" {
   token_max_ttl  = 86400
 }
 
-# Fake roles in admin namespace for entity count
+# Fake roles in reporting-demo namespace for entity count
 resource "vault_approle_auth_backend_role" "admin_fake" {
   count = var.enable_approle_auth && var.create_fake_roles ? var.fake_roles_count : 0
 
+  namespace      = vault_namespace.reporting_demo.path_fq
   backend        = vault_auth_backend.approle_admin[0].path
   role_name      = "admin-fake-role-${count.index + 1}"
   token_policies = ["default"]
@@ -88,9 +107,10 @@ resource "vault_approle_auth_backend_role" "admin_fake" {
   token_max_ttl  = 3600
 }
 
-# Top-level organizational namespaces
+# Top-level organizational namespaces under reporting-demo
 resource "vault_namespace" "engineering" {
-  path = "engineering"
+  namespace = vault_namespace.reporting_demo.path
+  path      = "engineering"
 
   custom_metadata = merge(
     var.namespace_custom_metadata,
@@ -102,7 +122,8 @@ resource "vault_namespace" "engineering" {
 }
 
 resource "vault_namespace" "production" {
-  path = "production"
+  namespace = vault_namespace.reporting_demo.path
+  path      = "production"
 
   custom_metadata = merge(
     var.namespace_custom_metadata,

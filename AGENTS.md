@@ -4,7 +4,7 @@ This file provides instructions for AI coding agents working on this Terraform p
 
 ## Project Overview
 
-This project manages AWS infrastructure using Terraform.
+This project manages HCP Vault configuration using Terraform.
 
 ## Module and Repository Structure
 
