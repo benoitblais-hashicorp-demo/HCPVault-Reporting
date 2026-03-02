@@ -330,7 +330,7 @@ resource "vault_approle_auth_backend_role" "app_role" {
   namespace      = vault_namespace.apps[each.key].path_fq
   backend        = vault_auth_backend.approle_apps[each.key].path
   role_name      = "${each.value.app}-role"
-  token_policies = ["${each.value.app}", "default"]
+  token_policies = [each.value.app, "default"]
   token_ttl      = 1800
   token_max_ttl  = 43200
 }
