@@ -1,3 +1,12 @@
+output "reporting_demo_namespace" {
+  description = "Root reporting-demo namespace details."
+  value = {
+    id      = vault_namespace.reporting_demo.namespace_id
+    path    = vault_namespace.reporting_demo.path
+    path_fq = vault_namespace.reporting_demo.path_fq
+  }
+}
+
 output "demo_namespace" {
   description = "Demo namespace details."
   value = var.enable_demo_namespace ? {
