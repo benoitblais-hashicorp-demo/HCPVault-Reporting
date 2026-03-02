@@ -112,7 +112,7 @@ The following requirements are needed by this module:
 
 - <a name="requirement_random"></a> [random](#requirement\_random) (~> 3.6)
 
-- <a name="requirement_vault"></a> [vault](#requirement\_vault) (5.6.0)
+- <a name="requirement_vault"></a> [vault](#requirement\_vault) (5.7.0)
 
 ## Modules
 
