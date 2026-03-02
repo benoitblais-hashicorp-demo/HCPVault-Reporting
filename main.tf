@@ -15,7 +15,7 @@ resource "vault_namespace" "reporting_demo" {
 resource "vault_namespace" "demo" {
   count = var.enable_demo_namespace ? 1 : 0
 
-  namespace = vault_namespace.reporting_demo.path
+  namespace = vault_namespace.reporting_demo.path_fq
   path      = "demo"
 
   custom_metadata = merge(
@@ -109,7 +109,7 @@ resource "vault_approle_auth_backend_role" "admin_fake" {
 
 # Top-level organizational namespaces under reporting-demo
 resource "vault_namespace" "engineering" {
-  namespace = vault_namespace.reporting_demo.path
+  namespace = vault_namespace.reporting_demo.path_fq
   path      = "engineering"
 
   custom_metadata = merge(
@@ -122,7 +122,7 @@ resource "vault_namespace" "engineering" {
 }
 
 resource "vault_namespace" "production" {
-  namespace = vault_namespace.reporting_demo.path
+  namespace = vault_namespace.reporting_demo.path_fq
   path      = "production"
 
   custom_metadata = merge(
@@ -216,7 +216,7 @@ resource "vault_approle_auth_backend_role" "production_fake" {
 resource "vault_namespace" "teams" {
   for_each = var.teams
 
-  namespace = vault_namespace.engineering.path
+  namespace = vault_namespace.engineering.path_fq
   path      = each.key
 
   custom_metadata = merge(
