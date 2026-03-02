@@ -1,6 +1,6 @@
 # HCPVault-Reporting
 
-This Terraform module provisions a hierarchical namespace structure for HashiCorp Vault Enterprise, following organizational best practices for multi-team environments. It configures both userpass authentication in the admin namespace and AppRole authentication in all namespaces for application and automation workflows.
+This Terraform module provisions a hierarchical namespace structure for HashiCorp Vault Enterprise, following organizational best practices for multi-team environments. It creates a dedicated `reporting-demo` namespace for complete isolation and configures both userpass and AppRole authentication methods across all namespaces for application and automation workflows.
 
 ## Permissions
 
@@ -10,7 +10,7 @@ The following Vault permissions are required to provision resources:
 - `sys/auth/*` - Mount and configure authentication methods
 - `auth/userpass/*` - Create and manage userpass users
 - `auth/approle/*` - Create and manage AppRole roles
-- Read/Write permissions on the admin namespace
+- Administrative access to create the `reporting-demo` root namespace
 - Administrative access to create nested namespace hierarchies
 
 ## Authentication
@@ -19,19 +19,20 @@ Authentication to Vault can be configured using one of the following methods:
 
 - **VAULT_TOKEN**: Set the `VAULT_TOKEN` environment variable with a valid Vault token
 - **VAULT_ADDR**: Set the `VAULT_ADDR` environment variable to your Vault server address (e.g., `https://vault.example.com:8200`)
-- **VAULT_NAMESPACE**: Set to `admin` to provision resources in the admin namespace
+- **VAULT_NAMESPACE**: Optional - can be set to `reporting-demo` to scope operations to the reporting-demo namespace
 
 Example:
 ```bash
 export VAULT_ADDR="https://vault.example.com:8200"
 export VAULT_TOKEN="your-vault-token"
-export VAULT_NAMESPACE="admin"
+# Optional: export VAULT_NAMESPACE="reporting-demo"
 ```
 
 ## Features
 
+- **Isolated Root Namespace**: Creates a dedicated `reporting-demo` namespace for complete isolation from other Vault resources
 - **Hierarchical Namespace Structure**: Creates a multi-level namespace hierarchy for organizational separation
-- **Userpass Authentication**: Configures username/password authentication in the existing admin namespace
+- **Userpass Authentication**: Configures username/password authentication in the reporting-demo namespace
 - **AppRole Authentication**: Configures AppRole auth method in each namespace for application and automation workflows
 - **User Management**: Creates multiple users with configurable passwords and policies
 - **Organizational Namespaces**: Top-level namespaces for departments (engineering) and environments (production)
@@ -46,13 +47,13 @@ export VAULT_NAMESPACE="admin"
 The module creates the following namespace structure:
 
 ```
-admin/ (existing - where you're authenticated)
+reporting-demo/ (root namespace for isolation)
 ├── userpass/
 │   ├── admin user
 │   ├── engineer user
 │   └── operator user
 ├── approle/ (admin-automation role)
-├── demo (optional)
+├── demo/ (optional)
 ├── engineering/
 │   ├── approle/ (engineering-automation role)
 │   ├── platform/
@@ -85,7 +86,7 @@ admin/ (existing - where you're authenticated)
 
 ## Default Users
 
-The module creates the following default users in the admin namespace (passwords should be changed):
+The module creates the following default users in the reporting-demo namespace (passwords should be changed):
 
 - **admin**: Administrative user with admin and default policies
 - **engineer**: Engineering user with engineering and default policies
@@ -95,7 +96,7 @@ The module creates the following default users in the admin namespace (passwords
 
 AppRole authentication is configured in each namespace with the following characteristics:
 
-- **Admin Namespace**: `admin-automation` role for administrative automation
+- **Reporting-Demo Namespace**: `admin-automation` role for administrative automation
 - **Engineering Namespace**: `engineering-automation` role for engineering workflows
 - **Production Namespace**: `production-automation` role with tighter security (30m default TTL)
 - **Team Namespaces**: Each team gets its own AppRole for team-level automation
