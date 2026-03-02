@@ -284,6 +284,7 @@ The following resources are used by this module:
 - [vault_namespace.demo](https://registry.terraform.io/providers/hashicorp/vault/5.6.0/docs/resources/namespace) (resource)
 - [vault_namespace.engineering](https://registry.terraform.io/providers/hashicorp/vault/5.6.0/docs/resources/namespace) (resource)
 - [vault_namespace.production](https://registry.terraform.io/providers/hashicorp/vault/5.6.0/docs/resources/namespace) (resource)
+- [vault_namespace.reporting_demo](https://registry.terraform.io/providers/hashicorp/vault/5.6.0/docs/resources/namespace) (resource)
 - [vault_namespace.teams](https://registry.terraform.io/providers/hashicorp/vault/5.6.0/docs/resources/namespace) (resource)
 
 ## Outputs
@@ -317,6 +318,10 @@ Description: Summary of fake roles created for entity count testing.
 ### <a name="output_production_namespace"></a> [production\_namespace](#output\_production\_namespace)
 
 Description: Production namespace details.
+
+### <a name="output_reporting_demo_namespace"></a> [reporting\_demo\_namespace](#output\_reporting\_demo\_namespace)
+
+Description: Root reporting-demo namespace details.
 
 ### <a name="output_team_namespaces"></a> [team\_namespaces](#output\_team\_namespaces)
 
