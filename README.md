@@ -114,7 +114,7 @@ The following requirements are needed by this module:
 
 - <a name="requirement_random"></a> [random](#requirement\_random) (~> 3.6)
 
-- <a name="requirement_vault"></a> [vault](#requirement\_vault) (5.7.0)
+- <a name="requirement_vault"></a> [vault](#requirement\_vault) (5.8.0)
 
 ## Modules
 
@@ -265,29 +265,29 @@ Default:
 The following resources are used by this module:
 
 - [random_password.userpass_passwords](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) (resource)
-- [vault_approle_auth_backend_role.admin_automation](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/approle_auth_backend_role) (resource)
-- [vault_approle_auth_backend_role.admin_fake](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/approle_auth_backend_role) (resource)
-- [vault_approle_auth_backend_role.app_fake](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/approle_auth_backend_role) (resource)
-- [vault_approle_auth_backend_role.app_role](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/approle_auth_backend_role) (resource)
-- [vault_approle_auth_backend_role.engineering_automation](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/approle_auth_backend_role) (resource)
-- [vault_approle_auth_backend_role.engineering_fake](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/approle_auth_backend_role) (resource)
-- [vault_approle_auth_backend_role.production_automation](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/approle_auth_backend_role) (resource)
-- [vault_approle_auth_backend_role.production_fake](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/approle_auth_backend_role) (resource)
-- [vault_approle_auth_backend_role.team_automation](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/approle_auth_backend_role) (resource)
-- [vault_approle_auth_backend_role.team_fake](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/approle_auth_backend_role) (resource)
-- [vault_auth_backend.approle_admin](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/auth_backend) (resource)
-- [vault_auth_backend.approle_apps](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/auth_backend) (resource)
-- [vault_auth_backend.approle_engineering](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/auth_backend) (resource)
-- [vault_auth_backend.approle_production](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/auth_backend) (resource)
-- [vault_auth_backend.approle_teams](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/auth_backend) (resource)
-- [vault_auth_backend.userpass](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/auth_backend) (resource)
-- [vault_generic_endpoint.userpass_users](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/generic_endpoint) (resource)
-- [vault_namespace.apps](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/namespace) (resource)
-- [vault_namespace.demo](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/namespace) (resource)
-- [vault_namespace.engineering](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/namespace) (resource)
-- [vault_namespace.production](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/namespace) (resource)
-- [vault_namespace.reporting_demo](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/namespace) (resource)
-- [vault_namespace.teams](https://registry.terraform.io/providers/hashicorp/vault/5.7.0/docs/resources/namespace) (resource)
+- [vault_approle_auth_backend_role.admin_automation](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/approle_auth_backend_role) (resource)
+- [vault_approle_auth_backend_role.admin_fake](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/approle_auth_backend_role) (resource)
+- [vault_approle_auth_backend_role.app_fake](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/approle_auth_backend_role) (resource)
+- [vault_approle_auth_backend_role.app_role](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/approle_auth_backend_role) (resource)
+- [vault_approle_auth_backend_role.engineering_automation](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/approle_auth_backend_role) (resource)
+- [vault_approle_auth_backend_role.engineering_fake](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/approle_auth_backend_role) (resource)
+- [vault_approle_auth_backend_role.production_automation](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/approle_auth_backend_role) (resource)
+- [vault_approle_auth_backend_role.production_fake](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/approle_auth_backend_role) (resource)
+- [vault_approle_auth_backend_role.team_automation](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/approle_auth_backend_role) (resource)
+- [vault_approle_auth_backend_role.team_fake](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/approle_auth_backend_role) (resource)
+- [vault_auth_backend.approle_admin](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/auth_backend) (resource)
+- [vault_auth_backend.approle_apps](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/auth_backend) (resource)
+- [vault_auth_backend.approle_engineering](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/auth_backend) (resource)
+- [vault_auth_backend.approle_production](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/auth_backend) (resource)
+- [vault_auth_backend.approle_teams](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/auth_backend) (resource)
+- [vault_auth_backend.userpass](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/auth_backend) (resource)
+- [vault_generic_endpoint.userpass_users](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/generic_endpoint) (resource)
+- [vault_namespace.apps](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/namespace) (resource)
+- [vault_namespace.demo](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/namespace) (resource)
+- [vault_namespace.engineering](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/namespace) (resource)
+- [vault_namespace.production](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/namespace) (resource)
+- [vault_namespace.reporting_demo](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/namespace) (resource)
+- [vault_namespace.teams](https://registry.terraform.io/providers/hashicorp/vault/5.8.0/docs/resources/namespace) (resource)
 
 ## Outputs
 
